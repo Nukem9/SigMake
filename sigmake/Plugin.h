@@ -11,6 +11,8 @@ extern int hMenu;
 
 extern HMODULE g_LocalDllHandle;
 
+duint DbgGetCurrentModule();
+
 enum
 {
 	PLUGIN_MENU_MAKESIG,

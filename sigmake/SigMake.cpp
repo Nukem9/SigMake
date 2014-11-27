@@ -123,6 +123,12 @@ SIG_DESCRIPTOR *GenerateSigFromCode(duint Start, duint End)
 	if (Settings::TrimSignatures)
 		TrimDescriptor(desc);
 
+	//
+	// Is the setting enabled to shorten signatures?
+	//
+	if (Settings::ShortestSignatures)
+		ShortenDescriptor(desc);
+
 	returnStatus = true;
 
 __freememory:
@@ -148,6 +154,49 @@ __freememory:
 	}
 
 	return desc;
+}
+
+void PatternScan(SIG_DESCRIPTOR *Descriptor, std::vector<duint>& Results)
+{
+	//
+	// Get a copy of the current module in disassembly
+	//
+	duint moduleBase	= DbgGetCurrentModule();
+	duint moduleSize	= DbgFunctions()->ModSizeFromAddr(moduleBase);
+	PBYTE processMemory = (PBYTE)BridgeAlloc(moduleSize);
+
+	if (!processMemory || !DbgMemRead(moduleBase, processMemory, moduleSize))
+	{
+		_plugin_printf("Couldn't allocate or read process memory for scan\n");
+		return;
+	}
+
+	//
+	// Compare function
+	//
+	auto DataCompare = [](PBYTE Data, SIG_DESCRIPTOR_ENTRY *Entries, ULONG Count)
+	{
+		ULONG i = 0;
+
+		for (; i < Count; ++Data, ++i)
+		{
+			if (Entries[i].Wildcard == 0 && *Data != Entries[i].Value)
+				return false;
+		}
+
+		return i == Count;
+	};
+
+	//
+	// Scanner loop
+	//
+	for (duint i = 0; i < moduleSize; i++)
+	{
+		PBYTE dataAddr = processMemory + i;
+
+		if (DataCompare(dataAddr, Descriptor->Entries, Descriptor->Count))
+			Results.push_back(moduleBase + i);
+	}
 }
 
 bool MatchOperands(_DInst *Instruction, _Operand *Operands, int PrefixSize)

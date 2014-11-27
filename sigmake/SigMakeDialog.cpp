@@ -80,8 +80,8 @@ void MakeSigDialogConvert(HWND hwndDlg, SIGNATURE_TYPE To, SIGNATURE_TYPE From)
 		//
 		BridgeFree(data);
 		BridgeFree(mask);
-
 		DescriptorToCode(desc, &data, &mask);
+		BridgeFree(desc);
 	}
 	else if (To == SIG_IDA && From == SIG_CODE)
 	{
@@ -91,8 +91,8 @@ void MakeSigDialogConvert(HWND hwndDlg, SIGNATURE_TYPE To, SIGNATURE_TYPE From)
 		// Buffer is reallocated
 		//
 		BridgeFree(data);
-
 		DescriptorToIDA(desc, &data);
+		BridgeFree(desc);
 
 		//
 		// Zero out old data
@@ -105,6 +105,48 @@ void MakeSigDialogConvert(HWND hwndDlg, SIGNATURE_TYPE To, SIGNATURE_TYPE From)
 
 	BridgeFree(data);
 	BridgeFree(mask);
+}
+
+void MakeSigDialogExecute(HWND hwndDlg)
+{
+	size_t dataLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT1)) + 1;
+	size_t maskLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT2)) + 1;
+
+	char *data = (char *)BridgeAlloc(dataLen);
+	char *mask = (char *)BridgeAlloc(maskLen);
+
+	GetWindowText(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT1), data, dataLen);
+	GetWindowText(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT2), mask, maskLen);
+
+	std::vector<duint> results;
+	SIG_DESCRIPTOR *desc = nullptr;
+
+	//
+	// Convert the string to a code descriptor
+	//
+	if (Settings::LastType == SIG_CODE)
+		desc = DescriptorFromCode(data, mask);
+	else if (Settings::LastType == SIG_IDA)
+		desc = DescriptorFromIDA(data);
+	else if (Settings::LastType == SIG_CRC)
+		desc = DescriptorFromCRC(data);
+
+	//
+	// Scan
+	//
+	PatternScan(desc, results);
+
+	for (auto& it : results)
+	{
+		_plugin_printf("result: 0x%X\n", it);
+	}
+
+	//
+	// Cleanup
+	//
+	BridgeFree(data);
+	BridgeFree(mask);
+	BridgeFree(desc);
 }
 
 INT_PTR CALLBACK MakeSigDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -154,6 +196,10 @@ INT_PTR CALLBACK MakeSigDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 		{
 		case IDC_SIGMAKE_SCAN:
 			// Scan for the signature
+			MakeSigDialogExecute(hwndDlg);
+
+			// Close
+			EndDialog(hwndDlg, NULL);
 			break;
 
 		case IDC_SIGMAKE_CANCEL:
