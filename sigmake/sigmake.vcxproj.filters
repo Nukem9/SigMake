@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="distorm">
+      <UniqueIdentifier>{10a5e749-9338-4c4a-b253-0efe1dab1511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{a2b1eb7d-5181-4750-9616-1ebea79d790c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SigMakeDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\config.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\decoder.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\distorm.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\instructions.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\insts.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\mnemonics.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\operands.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\prefix.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\textdefs.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\wstring.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="distorm\x86defs.h">
+      <Filter>distorm</Filter>
+    </ClInclude>
+    <ClInclude Include="SigMake.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Descriptor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SigMake.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SigMakeDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\decoder.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\distorm.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\instructions.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\insts.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\mnemonics.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\operands.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\prefix.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\textdefs.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="distorm\wstring.c">
+      <Filter>distorm</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Descriptor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="sigmake.rc">
+      <Filter>resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
