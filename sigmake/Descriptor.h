@@ -17,6 +17,7 @@ struct SIG_DESCRIPTOR
 
 SIG_DESCRIPTOR *AllocDescriptor(ULONG Count);
 void TrimDescriptor(SIG_DESCRIPTOR *Descriptor);
+void ShortenDescriptor(SIG_DESCRIPTOR *Descriptor);
 
 void DescriptorToCode(SIG_DESCRIPTOR *Descriptor, char **Data, char **Mask);
 void DescriptorToIDA(SIG_DESCRIPTOR *Descriptor, char **Data);

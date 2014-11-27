@@ -26,6 +26,39 @@ void TrimDescriptor(SIG_DESCRIPTOR *Descriptor)
 	}
 }
 
+void ShortenDescriptor(SIG_DESCRIPTOR *Descriptor)
+{
+	//
+	// This shortens patterns by detecting the number
+	// of resulting matches. If there is more than one,
+	// return. The signature is as short as possible.
+	//
+	std::vector<duint> results;
+
+	for (ULONG Init = Descriptor->Count; Descriptor->Count >= 1;)
+	{
+		// Zero previous values
+		results.clear();
+
+		// Scan
+		PatternScan(Descriptor, results);
+
+		// Is there more than 1 result?
+		if (results.size() > 1)
+		{
+			if (Init != Descriptor->Count)
+				Descriptor->Count++;
+
+			return;
+		}
+
+		_plugin_printf("SHORTENED\n");
+
+		// Otherwise decrease the sig and repeat
+		Descriptor->Count--;
+	}
+}
+
 void DescriptorToCode(SIG_DESCRIPTOR *Descriptor, char **Data, char **Mask)
 {
 	//
