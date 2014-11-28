@@ -12,7 +12,7 @@
     <Filter Include="distorm">
       <UniqueIdentifier>{10a5e749-9338-4c4a-b253-0efe1dab1511}</UniqueIdentifier>
     </Filter>
-    <Filter Include="resources">
+    <Filter Include="Resources">
       <UniqueIdentifier>{a2b1eb7d-5181-4750-9616-1ebea79d790c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -69,7 +69,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>resources</Filter>
+      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="Descriptor.h">
       <Filter>Header Files</Filter>
@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="sigmake.rc">
-      <Filter>resources</Filter>
+      <Filter>Resources</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -138,8 +138,30 @@ void MakeSigDialogExecute(HWND hwndDlg)
 	//
 	PatternScan(desc, results);
 
-	for (auto& it : results)
-		_plugin_printf("Result: 0x%X\n", it);
+	//
+	// Log it in the GUI
+	//
+	GuiReferenceDeleteAllColumns();
+	GuiReferenceAddColumn(20, "Address");
+	GuiReferenceAddColumn(100, "Disassembly");
+	GuiReferenceSetRowCount(results.size());
+
+	int i = 0;
+	for (auto& match : results)
+	{
+		DISASM_INSTR inst;
+		DbgDisasmAt(match, &inst);
+
+		char temp[16];
+		sprintf_s(temp, "%p", match);
+
+		GuiReferenceSetCellContent(i, 0, temp);
+		GuiReferenceSetCellContent(i++, 1, inst.instruction);
+	}
+
+	_plugin_logprintf("Found %d references(s)\n", results.size());
+	GuiReferenceSetProgress(100);
+	GuiUpdateAllViews();
 
 	//
 	// Cleanup
