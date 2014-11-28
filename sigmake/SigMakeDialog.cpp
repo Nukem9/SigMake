@@ -28,17 +28,9 @@ void MakeSigDialogInit(HWND hwndDlg)
 
 	switch (Settings::LastType)
 	{
-	case SIG_CODE:
-		DescriptorToCode(desc, &data, &mask);
-		break;
-
-	case SIG_IDA:
-		DescriptorToIDA(desc, &data);
-		break;
-
-	case SIG_CRC:
-		//DescriptorToCRC(desc, )
-		break;
+	case SIG_CODE:	DescriptorToCode(desc, &data, &mask);	break;
+	case SIG_IDA:	DescriptorToIDA(desc, &data);			break;
+	case SIG_CRC:	DescriptorToCRC(desc, &data, &mask);	break;
 	}
 
 	//

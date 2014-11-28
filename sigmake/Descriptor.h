@@ -21,7 +21,7 @@ void ShortenDescriptor(SIG_DESCRIPTOR *Descriptor);
 
 void DescriptorToCode(SIG_DESCRIPTOR *Descriptor, char **Data, char **Mask);
 void DescriptorToIDA(SIG_DESCRIPTOR *Descriptor, char **Data);
-void DescriptorToCRC(SIG_DESCRIPTOR *Descriptor, char *Data, char *Mask, size_t DataSize, size_t MaskSize);
+void DescriptorToCRC(SIG_DESCRIPTOR *Descriptor, char **Data, char **Mask);
 
 SIG_DESCRIPTOR *DescriptorFromCode(char *Data, char *Mask);
 SIG_DESCRIPTOR *DescriptorFromIDA(char *Data);
