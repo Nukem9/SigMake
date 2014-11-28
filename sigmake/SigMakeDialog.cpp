@@ -62,8 +62,8 @@ void MakeSigDialogConvert(HWND hwndDlg, SIGNATURE_TYPE To, SIGNATURE_TYPE From)
 	if (To == From)
 		return;
 
-	size_t dataLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT1)) + 1;
-	size_t maskLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT2)) + 1;
+	int dataLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT1)) + 1;
+	int maskLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT2)) + 1;
 
 	char *data = (char *)BridgeAlloc(dataLen);
 	char *mask = (char *)BridgeAlloc(maskLen);
@@ -109,8 +109,8 @@ void MakeSigDialogConvert(HWND hwndDlg, SIGNATURE_TYPE To, SIGNATURE_TYPE From)
 
 void MakeSigDialogExecute(HWND hwndDlg)
 {
-	size_t dataLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT1)) + 1;
-	size_t maskLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT2)) + 1;
+	int dataLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT1)) + 1;
+	int maskLen = GetWindowTextLength(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT2)) + 1;
 
 	char *data = (char *)BridgeAlloc(dataLen);
 	char *mask = (char *)BridgeAlloc(maskLen);
@@ -137,9 +137,7 @@ void MakeSigDialogExecute(HWND hwndDlg)
 	PatternScan(desc, results);
 
 	for (auto& it : results)
-	{
-		_plugin_printf("result: 0x%X\n", it);
-	}
+		_plugin_printf("Result: 0x%X\n", it);
 
 	//
 	// Cleanup

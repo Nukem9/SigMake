@@ -125,7 +125,7 @@ SIG_DESCRIPTOR *DescriptorFromCode(char *Data, char *Mask)
 	//
 	// Get the number of byte entries
 	//
-	ULONG count = strlen(Mask);
+	ULONG count = (ULONG)strlen(Mask);
 
 	//
 	// Allocate the descriptor

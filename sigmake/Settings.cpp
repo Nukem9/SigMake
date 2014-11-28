@@ -29,8 +29,8 @@ namespace Settings
 			CloseHandle(file);
 
 			// Set the default values
-			TrimSignatures = true;
-			IncludeShortJumps = true;
+			TrimSignatures		= true;
+			IncludeShortJumps	= true;
 			IncludeRelAddresses = true;
 
 			Save();
@@ -44,13 +44,13 @@ namespace Settings
 			return GetPrivateProfileInt("Options", Setting, 0, IniPath) > 0;
 		};
 
-		TrimSignatures = GetProfileBool("TrimSignatures");
-		DisableWildcards = GetProfileBool("DisableWildcards");
-		ShortestSignatures = GetProfileBool("ShortestSignatures");
-		IncludeShortJumps = GetProfileBool("IncludeShortJumps");
-		IncludeMemRefences = GetProfileBool("IncludeMemRefences");
-		IncludeRelAddresses = GetProfileBool("IncludeRelAddresses");
-		LastType = (SIGNATURE_TYPE)GetPrivateProfileInt("Options", "LastType", 0, IniPath);
+		TrimSignatures		= GetProfileBool("TrimSignatures");
+		DisableWildcards	= GetProfileBool("DisableWildcards");
+		ShortestSignatures	= GetProfileBool("ShortestSignatures");
+		IncludeShortJumps	= GetProfileBool("IncludeShortJumps");
+		IncludeMemRefences	= GetProfileBool("IncludeMemRefences");
+		IncludeRelAddresses	= GetProfileBool("IncludeRelAddresses");
+		LastType			= (SIGNATURE_TYPE)GetPrivateProfileInt("Options", "LastType", 0, IniPath);
 	}
 
 	void Save()
@@ -63,12 +63,12 @@ namespace Settings
 			WritePrivateProfileString("Options", Setting, temp, IniPath);
 		};
 
-		SetProfileInt("TrimSignatures", TrimSignatures);
-		SetProfileInt("DisableWildcards", DisableWildcards);
-		SetProfileInt("ShortestSignatures", ShortestSignatures);
-		SetProfileInt("IncludeShortJumps", IncludeShortJumps);
-		SetProfileInt("IncludeMemRefences", IncludeMemRefences);
-		SetProfileInt("IncludeRelAddresses", IncludeRelAddresses);
-		SetProfileInt("LastType", LastType);
+		SetProfileInt("TrimSignatures",			TrimSignatures);
+		SetProfileInt("DisableWildcards",		DisableWildcards);
+		SetProfileInt("ShortestSignatures",		ShortestSignatures);
+		SetProfileInt("IncludeShortJumps",		IncludeShortJumps);
+		SetProfileInt("IncludeMemRefences",		IncludeMemRefences);
+		SetProfileInt("IncludeRelAddresses",	IncludeRelAddresses);
+		SetProfileInt("LastType",				LastType);
 	}
 }
