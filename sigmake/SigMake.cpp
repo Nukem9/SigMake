@@ -149,7 +149,6 @@ __freememory:
 		if (desc)
 			BridgeFree(desc);
 
-		_plugin_printf("Unable to generate signature\n");
 		return nullptr;
 	}
 
@@ -158,6 +157,15 @@ __freememory:
 
 void PatternScan(SIG_DESCRIPTOR *Descriptor, std::vector<duint>& Results)
 {
+	//
+	// Verify
+	//
+	if (Descriptor->Count <= 0)
+	{
+		_plugin_printf("Trying to scan with an invalid signature\n");
+		return;
+	}
+
 	//
 	// Get a copy of the current module in disassembly
 	//

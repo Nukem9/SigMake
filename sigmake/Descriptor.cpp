@@ -35,7 +35,7 @@ void ShortenDescriptor(SIG_DESCRIPTOR *Descriptor)
 	//
 	std::vector<duint> results;
 
-	for (ULONG Init = Descriptor->Count; Descriptor->Count >= 1;)
+	for (ULONG init = Descriptor->Count; Descriptor->Count >= 1;)
 	{
 		// Zero previous values
 		results.clear();
@@ -46,13 +46,11 @@ void ShortenDescriptor(SIG_DESCRIPTOR *Descriptor)
 		// Is there more than 1 result?
 		if (results.size() > 1)
 		{
-			if (Init != Descriptor->Count)
+			if (init != Descriptor->Count)
 				Descriptor->Count++;
 
 			return;
 		}
-
-		_plugin_printf("SHORTENED\n");
 
 		// Otherwise decrease the sig and repeat
 		Descriptor->Count--;
