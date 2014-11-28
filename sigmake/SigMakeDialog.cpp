@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+HWND g_SigMakeDialog;
+
 void MakeSigDialogInit(HWND hwndDlg)
 {
 	//
@@ -183,7 +185,7 @@ INT_PTR CALLBACK MakeSigDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 
 	case WM_CLOSE:
 	{
-		EndDialog(hwndDlg, NULL);
+		CLOSE_WINDOW(hwndDlg, g_SigMakeDialog);
 		return TRUE;
 	}
 	break;
@@ -197,12 +199,12 @@ INT_PTR CALLBACK MakeSigDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 			MakeSigDialogExecute(hwndDlg);
 
 			// Close
-			EndDialog(hwndDlg, NULL);
+			CLOSE_WINDOW(hwndDlg, g_SigMakeDialog);
 			break;
 
 		case IDC_SIGMAKE_CANCEL:
 			// Close
-			EndDialog(hwndDlg, NULL);
+			CLOSE_WINDOW(hwndDlg, g_SigMakeDialog);
 			break;
 
 		case IDC_SIGMAKE_CODE:
@@ -247,13 +249,19 @@ INT_PTR CALLBACK MakeSigDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 
 void OpenSigMakeDialog()
 {
-	HWND wnd = CreateDialog(g_LocalDllHandle, MAKEINTRESOURCE(IDD_MAKESIG), GuiGetWindowHandle(), MakeSigDialogProc);
+	g_SigMakeDialog = CreateDialog(g_LocalDllHandle, MAKEINTRESOURCE(IDD_MAKESIG), GuiGetWindowHandle(), MakeSigDialogProc);
 
-	if (!wnd)
+	if (!g_SigMakeDialog)
 	{
 		_plugin_printf("Failed to create signature view window\n");
 		return;
 	}
 
-	ShowWindow(wnd, SW_SHOW);
+	ShowWindow(g_SigMakeDialog, SW_SHOW);
+}
+
+void DestroySigMakeDialog()
+{
+	if (g_SigMakeDialog)
+		SendMessage(g_SigMakeDialog, WM_CLOSE, 0, 0);
 }

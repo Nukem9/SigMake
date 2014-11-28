@@ -1,8 +1,7 @@
 #include "stdafx.h"
 
-int pluginHandle;
-HWND hwndDlg;
-int hMenu;
+int g_MenuHandle;
+int g_PluginHandle;
 
 HMODULE g_LocalDllHandle;
 
@@ -57,11 +56,11 @@ DLL_EXPORT bool pluginit(PLUG_INITSTRUCT *InitStruct)
 {
 	InitStruct->pluginVersion	= PLUGIN_VERSION;
 	InitStruct->sdkVersion		= PLUG_SDKVERSION;
-	pluginHandle				= InitStruct->pluginHandle;
+	g_PluginHandle				= InitStruct->pluginHandle;
 	strcpy_s(InitStruct->pluginName, PLUGIN_NAME);
 
 	// Add any of the callbacks
-	_plugin_registercallback(pluginHandle, CB_MENUENTRY, (CBPLUGIN)MenuEntryCallback);
+	_plugin_registercallback(g_PluginHandle, CB_MENUENTRY, (CBPLUGIN)MenuEntryCallback);
 
 	// Update all checkbox settings
 	Settings::InitIni();
@@ -71,24 +70,27 @@ DLL_EXPORT bool pluginit(PLUG_INITSTRUCT *InitStruct)
 
 DLL_EXPORT bool plugstop()
 {
+	// Close dialogs
+	DestroySigMakeDialog();
+	DestroySettingsDialog();
+
 	// Clear the menu
-	_plugin_menuclear(hMenu);
+	_plugin_menuclear(g_MenuHandle);
 
 	// Remove callbacks
-	_plugin_unregistercallback(pluginHandle, CB_MENUENTRY);
+	_plugin_unregistercallback(g_PluginHandle, CB_MENUENTRY);
 	return true;
 }
 
 DLL_EXPORT void plugsetup(PLUG_SETUPSTRUCT *SetupStruct)
 {
-	hwndDlg = SetupStruct->hwndDlg;
-	hMenu	= SetupStruct->hMenu;
+	g_MenuHandle = SetupStruct->hMenu;
 
 	// Initialize the menu
-	_plugin_menuaddentry(hMenu, PLUGIN_MENU_MAKESIG, "&Create signature");
-	_plugin_menuaddseparator(hMenu);
-	_plugin_menuaddentry(hMenu, PLUGIN_MENU_SETTINGS, "&Settings");
-	_plugin_menuaddentry(hMenu, PLUGIN_MENU_ABOUT, "&About");
+	_plugin_menuaddentry(g_MenuHandle, PLUGIN_MENU_MAKESIG, "&Create signature");
+	_plugin_menuaddseparator(g_MenuHandle);
+	_plugin_menuaddentry(g_MenuHandle, PLUGIN_MENU_SETTINGS, "&Settings");
+	_plugin_menuaddentry(g_MenuHandle, PLUGIN_MENU_ABOUT, "&About");
 }
 
 BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)

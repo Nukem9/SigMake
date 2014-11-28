@@ -4,11 +4,6 @@
 #define DLL_EXPORT __declspec(dllexport)
 #endif //DLL_EXPORT
 
-// Global variables
-extern int pluginHandle;
-extern HWND hwndDlg;
-extern int hMenu;
-
 extern HMODULE g_LocalDllHandle;
 
 duint DbgGetCurrentModule();

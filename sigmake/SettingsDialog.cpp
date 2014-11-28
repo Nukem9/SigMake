@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+HWND g_SettingsDialog;
+
 INT_PTR CALLBACK SettingsDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -19,7 +21,7 @@ INT_PTR CALLBACK SettingsDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPAR
 
 	case WM_CLOSE:
 	{
-		EndDialog(hwndDlg, NULL);
+		CLOSE_WINDOW(hwndDlg, g_SettingsDialog);
 		return TRUE;
 	}
 	break;
@@ -41,11 +43,11 @@ INT_PTR CALLBACK SettingsDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPAR
 			Settings::Save();
 
 			// Close dialog
-			EndDialog(hwndDlg, NULL);
+			CLOSE_WINDOW(hwndDlg, g_SettingsDialog);
 			break;
 
 		case IDC_SETTINGS_CANCEL:
-			EndDialog(hwndDlg, NULL);
+			CLOSE_WINDOW(hwndDlg, g_SettingsDialog);
 			break;
 		}
 	}
@@ -57,13 +59,19 @@ INT_PTR CALLBACK SettingsDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPAR
 
 void OpenSettingsDialog()
 {
-	HWND wnd = CreateDialog(g_LocalDllHandle, MAKEINTRESOURCE(IDD_SETTINGS), GuiGetWindowHandle(), SettingsDialogProc);
+	g_SettingsDialog = CreateDialog(g_LocalDllHandle, MAKEINTRESOURCE(IDD_SETTINGS), GuiGetWindowHandle(), SettingsDialogProc);
 
-	if (!wnd)
+	if (!g_SettingsDialog)
 	{
 		_plugin_printf("Failed to create settings window\n");
 		return;
 	}
 
-	ShowWindow(wnd, SW_SHOW);
+	ShowWindow(g_SettingsDialog, SW_SHOW);
+}
+
+void DestroySettingsDialog()
+{
+	if (g_SettingsDialog)
+		SendMessage(g_SettingsDialog, WM_CLOSE, 0, 0);
 }
