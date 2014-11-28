@@ -59,6 +59,9 @@ INT_PTR CALLBACK SettingsDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPAR
 
 void OpenSettingsDialog()
 {
+	//
+	// Open the dialog
+	//
 	g_SettingsDialog = CreateDialog(g_LocalDllHandle, MAKEINTRESOURCE(IDD_SETTINGS), GuiGetWindowHandle(), SettingsDialogProc);
 
 	if (!g_SettingsDialog)

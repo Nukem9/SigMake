@@ -44,7 +44,7 @@ extern "C"
 //
 // PLUGIN
 //
-#define CLOSE_WINDOW(handle, global) { (global) = nullptr; EndDialog((handle), NULL); }
+#define CLOSE_WINDOW(handle, global) { (global) = nullptr; DestroyWindow((handle)); }
 
 #include "resource.h"
 #include "Plugin.h"

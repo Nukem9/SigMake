@@ -271,6 +271,18 @@ INT_PTR CALLBACK MakeSigDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 
 void OpenSigMakeDialog()
 {
+	//
+	// Ensure a process is being debugged first
+	//
+	if (!DbgIsDebugging())
+	{
+		_plugin_printf("No process is being debugged!\n");
+		return;
+	}
+
+	//
+	// Open the dialog
+	//
 	g_SigMakeDialog = CreateDialog(g_LocalDllHandle, MAKEINTRESOURCE(IDD_MAKESIG), GuiGetWindowHandle(), MakeSigDialogProc);
 
 	if (!g_SigMakeDialog)
