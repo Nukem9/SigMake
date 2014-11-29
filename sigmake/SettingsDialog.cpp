@@ -8,6 +8,13 @@ INT_PTR CALLBACK SettingsDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPAR
 	{
 	case WM_INITDIALOG:
 	{
+		//
+		// If this isn't a 64-bit build, disable the RIP-relative option
+		//
+#ifndef _WIN64
+		EnableWindow(GetDlgItem(hwndDlg, IDC_SETTINGS_RELADDR), FALSE);
+#endif // ndef _WIN64
+
 		// Update all checkbox settings
 		#define CHECK(x) ((x) ? BST_CHECKED : BST_UNCHECKED)
 		SendMessage(GetDlgItem(hwndDlg, IDC_SETTINGS_TRIM), BM_SETCHECK, CHECK(Settings::TrimSignatures), 0);

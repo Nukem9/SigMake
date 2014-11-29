@@ -11,6 +11,7 @@
 extern "C"
 {
 #include "distorm/distorm.h"
+#include "distorm/mnemonics.h"
 #include "distorm/instructions.h"
 #include "distorm/prefix.h"
 }

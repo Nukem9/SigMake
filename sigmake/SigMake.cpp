@@ -248,11 +248,17 @@ bool MatchOperands(_DInst *Instruction, _Operand *Operands, int PrefixSize)
 		case O_IMM2:	//
 			continue;
 
-		case O_DISP:	// Only accept DISP if it's less than 32 bits
-		case O_SMEM:	//
+		case O_DISP:	// Only accept DISP if it's less than 32 bits,
+		case O_SMEM:	// or if it is RIP-relative
 		case O_MEM:		//
 			if (Settings::IncludeMemRefences || Instruction->dispSize < 32)
 				continue;
+
+#ifdef _WIN64
+			if (Settings::IncludeRelAddresses && Operands[i].index == R_RIP)
+				continue;
+#endif // _WIN64
+
 			return false;
 
 		case O_PC:		// Relative branches
