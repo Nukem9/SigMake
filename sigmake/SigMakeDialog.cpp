@@ -144,7 +144,7 @@ void MakeSigDialogExecute(HWND hwndDlg)
 		DISASM_INSTR inst;
 		DbgDisasmAt(match, &inst);
 
-		char temp[16];
+		char temp[32];
 		sprintf_s(temp, "%p", match);
 
 		GuiReferenceSetCellContent(i, 0, temp);
@@ -212,12 +212,10 @@ INT_PTR CALLBACK MakeSigDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARA
 			// Scan for the signature
 			MakeSigDialogExecute(hwndDlg);
 
-			// Close
 			CLOSE_WINDOW(hwndDlg, g_SigMakeDialog);
 			break;
 
 		case IDC_SIGMAKE_CANCEL:
-			// Close
 			CLOSE_WINDOW(hwndDlg, g_SigMakeDialog);
 			break;
 

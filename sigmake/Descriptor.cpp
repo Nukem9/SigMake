@@ -166,9 +166,10 @@ SIG_DESCRIPTOR *DescriptorFromIDA(char *Data)
 	//
 	// Get the number of entries by counting spaces + 1
 	//
-	ULONG count = 1;
+	size_t dataLen	= strlen(Data);
+	ULONG count		= 1;
 
-	for (size_t i = 0; i < strlen(Data); i++)
+	for (size_t i = 0; i < dataLen; i++)
 	{
 		if (Data[i] == ' ')
 			count++;
@@ -185,7 +186,10 @@ SIG_DESCRIPTOR *DescriptorFromIDA(char *Data)
 	//
 	// 00 44 ? ? 66 ? 88 99
 	//
-	for (ULONG i = 0; Data[0] != '\0'; i++)
+	char *dataStart = Data;
+	char *dataEnd	= Data + dataLen;
+
+	for (ULONG i = 0; Data < dataEnd; i++)
 	{
 		if (Data[0] == '?')
 		{
