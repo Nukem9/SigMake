@@ -31,9 +31,9 @@ SIG_DESCRIPTOR *GenerateSigFromCode(duint Start, duint End)
 	//
 	processMemory = (PBYTE)BridgeAlloc(codeSize);
 
-	if (!processMemory || !DbgMemRead(Start, processMemory, codeSize))
+	if (!DbgMemRead(Start, processMemory, codeSize))
 	{
-		_plugin_printf("Couldn't allocate or read process memory\n");
+		_plugin_printf("Couldn't read process memory\n");
 		goto __freememory;
 	}
 
@@ -42,23 +42,11 @@ SIG_DESCRIPTOR *GenerateSigFromCode(duint Start, duint End)
 	//
 	desc = AllocDescriptor((ULONG)codeSize);
 
-	if (!desc)
-	{
-		_plugin_printf("Failed to allocate signature descriptor array\n");
-		goto __freememory;
-	}
-
 	//
 	// Allocate the disassembly buffer
 	//
 	uint32_t instructionCount	= 0;
 	instructions				= (_DInst *)BridgeAlloc(codeSize * sizeof(_DInst));
-
-	if (!instructions)
-	{
-		_plugin_printf("Failed to allocate disassembly buffer\n");
-		goto __freememory;
-	}
 
 	//
 	// Decode the assembly

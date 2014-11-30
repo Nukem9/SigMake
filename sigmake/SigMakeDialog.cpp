@@ -33,6 +33,8 @@ void MakeSigDialogInit(HWND hwndDlg)
 	case SIG_CRC:	DescriptorToCRC(desc, &data, &mask);	break;
 	}
 
+	BridgeFree(desc);
+
 	//
 	// Set the edit box text and clean up
 	//
@@ -47,8 +49,6 @@ void MakeSigDialogInit(HWND hwndDlg)
 		SetWindowText(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT2), mask);
 		BridgeFree(mask);
 	}
-
-	BridgeFree(desc);
 }
 
 void MakeSigDialogConvert(HWND hwndDlg, SIGNATURE_TYPE To, SIGNATURE_TYPE From)

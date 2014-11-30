@@ -2,8 +2,8 @@
 
 SIG_DESCRIPTOR *AllocDescriptor(ULONG Count)
 {
-	ULONG totalSize = sizeof(SIG_DESCRIPTOR) + (sizeof(SIG_DESCRIPTOR_ENTRY) * Count);
-	SIG_DESCRIPTOR *temp = (SIG_DESCRIPTOR *)BridgeAlloc(totalSize);
+	ULONG totalSize			= sizeof(SIG_DESCRIPTOR) + (sizeof(SIG_DESCRIPTOR_ENTRY) * Count);
+	SIG_DESCRIPTOR *temp	= (SIG_DESCRIPTOR *)BridgeAlloc(totalSize);
 
 	if (temp)
 		temp->Count = Count;
@@ -132,9 +132,6 @@ SIG_DESCRIPTOR *DescriptorFromCode(char *Data, char *Mask)
 	//
 	SIG_DESCRIPTOR *desc = AllocDescriptor(count);
 
-	if (!desc)
-		return nullptr;
-
 	//
 	// \x00\x00\x00\x00
 	// xx?x
@@ -179,9 +176,6 @@ SIG_DESCRIPTOR *DescriptorFromIDA(char *Data)
 	// Allocate the descriptor
 	//
 	SIG_DESCRIPTOR *desc = AllocDescriptor(count);
-
-	if (!desc)
-		return nullptr;
 
 	//
 	// 00 44 ? ? 66 ? 88 99
