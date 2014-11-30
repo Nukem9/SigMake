@@ -47,7 +47,7 @@ void MenuEntryCallback(CBTYPE Type, PLUG_CB_MENUENTRY *Info)
 		break;
 
 	case PLUGIN_MENU_ABOUT:
-		MessageBoxA(GuiGetWindowHandle(), "Plugin created by Nukem.\n\nRequest features or view the source code at:\nhttps://bitbucket.org/Nukem9/XXXXXXX/", "About", 0);
+		MessageBoxA(GuiGetWindowHandle(), "Plugin created by Nukem.\n\nRequest features or view the source code at:\nhttps://bitbucket.org/Nukem9/sigmake/", "About", 0);
 		break;
 	}
 }
