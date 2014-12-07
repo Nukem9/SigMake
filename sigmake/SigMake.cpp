@@ -161,9 +161,9 @@ void PatternScan(SIG_DESCRIPTOR *Descriptor, std::vector<duint>& Results)
 	duint moduleSize	= DbgFunctions()->ModSizeFromAddr(moduleBase);
 	PBYTE processMemory = (PBYTE)BridgeAlloc(moduleSize);
 
-	if (!processMemory || !DbgMemRead(moduleBase, processMemory, moduleSize))
+	if (!DbgMemRead(moduleBase, processMemory, moduleSize))
 	{
-		_plugin_printf("Couldn't allocate or read process memory for scan\n");
+		_plugin_printf("Couldn't read process memory for scan\n");
 		return;
 	}
 
