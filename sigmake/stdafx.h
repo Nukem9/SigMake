@@ -17,6 +17,14 @@ extern "C"
 }
 
 //
+// YARA
+//
+extern "C"
+{
+#include <yara.h>
+}
+
+//
 // X64DBG
 //
 #define PLUGIN_NAME		"SigMake"
