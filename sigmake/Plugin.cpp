@@ -42,10 +42,6 @@ void MenuEntryCallback(CBTYPE Type, PLUG_CB_MENUENTRY *Info)
 		OpenSigMakeDialog();
 		break;
 
-	case PLUGIN_MENU_YARASIG:
-		OpenYaraDialog();
-		break;
-
 	case PLUGIN_MENU_SETTINGS:
 		OpenSettingsDialog();
 		break;
@@ -92,7 +88,6 @@ DLL_EXPORT void plugsetup(PLUG_SETUPSTRUCT *SetupStruct)
 
 	// Initialize the menu
 	_plugin_menuaddentry(g_MenuHandle, PLUGIN_MENU_MAKESIG, "&Create signature");
-	_plugin_menuaddentry(g_MenuHandle, PLUGIN_MENU_YARASIG, "&Yara signature");
 	_plugin_menuaddseparator(g_MenuHandle);
 	_plugin_menuaddentry(g_MenuHandle, PLUGIN_MENU_SETTINGS, "&Settings");
 	_plugin_menuaddentry(g_MenuHandle, PLUGIN_MENU_ABOUT, "&About");

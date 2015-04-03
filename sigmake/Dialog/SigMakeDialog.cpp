@@ -112,22 +112,23 @@ void MakeSigDialogExecute(HWND hwndDlg)
 	GetWindowText(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT1), data, dataLen);
 	GetWindowText(GetDlgItem(hwndDlg, IDC_SIGMAKE_EDIT2), mask, maskLen);
 
-	std::vector<duint> results;
-	SIG_DESCRIPTOR *desc = nullptr;
-
 	//
 	// Convert the string to a code descriptor
 	//
-	if (Settings::LastType == SIG_CODE)
-		desc = DescriptorFromCode(data, mask);
-	else if (Settings::LastType == SIG_IDA)
-		desc = DescriptorFromIDA(data);
-	else if (Settings::LastType == SIG_CRC)
-		desc = DescriptorFromCRC(data);
+	SIG_DESCRIPTOR *desc = nullptr;
+
+	switch (Settings::LastType)
+	{
+	case SIG_CODE:	desc = DescriptorFromCode(data, mask);	break;
+	case SIG_IDA:	desc = DescriptorFromIDA(data);			break;
+	case SIG_CRC:	desc = DescriptorFromCRC(data);			break;
+	}
 
 	//
 	// Scan
 	//
+	std::vector<duint> results;
+
 	PatternScan(desc, results);
 
 	//

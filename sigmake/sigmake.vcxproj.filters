@@ -68,9 +68,6 @@
     <ClInclude Include="Descriptor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Yara.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Dialog\SigMakeDialog.h">
       <Filter>Dialog</Filter>
     </ClInclude>
@@ -119,9 +116,6 @@
       <Filter>distorm</Filter>
     </ClCompile>
     <ClCompile Include="Descriptor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Yara.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dialog\SettingsDialog.cpp">

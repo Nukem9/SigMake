@@ -17,14 +17,6 @@ extern "C"
 }
 
 //
-// YARA
-//
-extern "C"
-{
-#include <yara.h>
-}
-
-//
 // X64DBG
 //
 #define PLUGIN_NAME		"SigMake"
@@ -49,7 +41,6 @@ extern "C"
 #include "pluginsdk/_dbgfunctions.h"
 #include "pluginsdk/TitanEngine/TitanEngine.h"
 
-
 //
 // PLUGIN
 //
@@ -59,7 +50,6 @@ extern "C"
 #include "Plugin.h"
 #include "Descriptor.h"
 #include "SigMake.h"
-#include "Yara.h"
 #include "Dialog/SigMakeDialog.h"
 #include "Dialog/Settings.h"
 #include "Dialog/SettingsDialog.h"
