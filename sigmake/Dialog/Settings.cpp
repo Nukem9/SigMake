@@ -39,7 +39,7 @@ namespace Settings
 
 	void Load()
 	{
-		auto GetProfileBool = [](const char *Setting)
+		auto GetProfileBool = [](const char *Setting) -> bool
 		{
 			return GetPrivateProfileInt("Options", Setting, 0, IniPath) > 0;
 		};
@@ -55,7 +55,7 @@ namespace Settings
 
 	void Save()
 	{
-		auto SetProfileInt = [](const char *Setting, int Value)
+		auto SetProfileInt = [](const char *Setting, int Value) -> void
 		{
 			char temp[32];
 			sprintf_s(temp, "%i", (Value) ? 1 : 0);

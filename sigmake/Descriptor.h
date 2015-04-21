@@ -1,13 +1,20 @@
 #pragma once
 
+#pragma warning(push)
+#pragma warning(disable: 4200)// nonstandard extension used : zero-sized array in struct/union
+enum SIGNATURE_TYPE
+{
+	SIG_CODE,
+	SIG_IDA,
+	SIG_CRC,
+};
+
 struct SIG_DESCRIPTOR_ENTRY
 {
 	BYTE Value;
 	BYTE Wildcard;
 };
 
-#pragma warning(push)
-#pragma warning(disable: 4200)// nonstandard extension used : zero-sized array in struct/union
 struct SIG_DESCRIPTOR
 {
 	ULONG Count;

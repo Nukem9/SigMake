@@ -53,6 +53,7 @@ void MakeSigDialogInit(HWND hwndDlg)
 
 void MakeSigDialogConvert(HWND hwndDlg, SIGNATURE_TYPE To, SIGNATURE_TYPE From)
 {
+	// Don't convert if destination and source types are the same
 	if (To == From)
 		return;
 
@@ -137,7 +138,8 @@ void MakeSigDialogExecute(HWND hwndDlg)
 	GuiReferenceDeleteAllColumns();
 	GuiReferenceAddColumn(20, "Address");
 	GuiReferenceAddColumn(100, "Disassembly");
-	GuiReferenceSetRowCount(results.size());
+	GuiReferenceSetRowCount((int)results.size());
+	GuiReferenceSetProgress(0);
 
 	int i = 0;
 	for (auto& match : results)

@@ -1,12 +1,5 @@
 #pragma once
 
-enum SIGNATURE_TYPE
-{
-	SIG_CODE,
-	SIG_IDA,
-	SIG_CRC,
-};
-
 SIG_DESCRIPTOR *GenerateSigFromCode(duint Start, duint End);
 void PatternScan(SIG_DESCRIPTOR *Descriptor, std::vector<duint>& Results);
 

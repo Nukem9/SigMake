@@ -233,7 +233,7 @@ bool MatchOperands(_DInst *Instruction, _Operand *Operands, int PrefixSize)
 			return false;
 
 		case O_IMM1:	// Special operands for ENTER (These are INCLUDED)
-		case O_IMM2:	//
+		case O_IMM2:	// Same as above
 			continue;
 
 		case O_DISP:	// Only accept DISP if it's less than 32 bits,

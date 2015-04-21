@@ -43,7 +43,7 @@ void ShortenDescriptor(SIG_DESCRIPTOR *Descriptor)
 		// Scan
 		PatternScan(Descriptor, results);
 
-		// Is there more than 1 result?
+		// Was there more than 1 result?
 		if (results.size() > 1)
 		{
 			if (init != Descriptor->Count)
